@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/NYPD99/meet-me-here-backend/pkg/websocket"
 	//"github.com/TutorialEdge/realtime-chat-go-react/pkg/websocket"
@@ -36,5 +37,9 @@ func setupRoutes() {
 func main() {
 	fmt.Println("meet-me-here-backend")
 	setupRoutes()
-	http.ListenAndServe(":5000", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
+	http.ListenAndServe(":" + port, nil)
 }
